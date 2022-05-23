@@ -1,0 +1,24 @@
+name: Scrape the page and notify to Slack if it was updated.
+
+on:
+  schedule:
+    ## - cron:  '* * 1 * *'  ## TODO: Set up this when this code is completed.
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.scrape.outputs.changed }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Scrape the page
+        id: scrape
+        run: sh ./scrape.sh
+
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify to Slack
+        run: echo ${{needs.scrape.outputs.changed}}
