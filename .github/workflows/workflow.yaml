@@ -6,7 +6,7 @@ on:
     ## - cron:  '* * 1 * *'  ## TODO: Set up this when this code is completed.
 
 jobs:
-  scrape:
+  scrape_and_notify:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.scrape.outputs.changed }}
@@ -24,8 +24,28 @@ jobs:
         run: sh ./scrape.sh
 
       - name: Notify to Slack
-        run: echo ${{steps.scrape.outputs.changed}}
-      
+        id: slack
+        uses: slackapi/slack-github-action@v1.19.0
+        with:
+          payload: |
+          {
+            "text": "${{ title }}",
+            "attachments": [
+              {
+                "blocks": [
+                  {
+                    "type": "section".
+                    "text": {
+                      "type": "mrkdwn", "text": ${{ url }}
+                      }.
+                  }
+                ]
+              }
+            ]
+          }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            
       - name: Push diff
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
