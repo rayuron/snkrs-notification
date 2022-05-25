@@ -29,14 +29,14 @@ jobs:
         with:
           payload: |
             {
-              “text”: “<!channel> ${{ steps.scrape.outputs.title }}“,
-              “attachments”: [
+              "text”: "<!channel> ${{ steps.scrape.outputs.title }}",
+              "attachments”: [
                 {
-                  “color”: “#E60033”,
-                  “blocks”: [
+                  "color”: "#E60033”,
+                  "blocks”: [
                     {
-                      “type”: “section”,
-                      “text”: {“type”: “mrkdwn”, “text”: ${{ steps.scrape.outputs.url }}},
+                      "type”: "section”,
+                      "text”: {"type”: "mrkdwn”, "text”: ${{ steps.scrape.outputs.url }}},
                     },
                   ],
                 }
