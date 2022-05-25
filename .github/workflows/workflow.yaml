@@ -20,7 +20,8 @@ jobs:
 
   notify_and_push_diff:
     runs-on: ubuntu-latest
-
+    needs: scrape
+    
     steps:
       - name: Notify to Slack
         run: echo ${{needs.scrape.outputs.changed}}
