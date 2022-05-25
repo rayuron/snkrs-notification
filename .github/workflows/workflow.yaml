@@ -28,8 +28,8 @@ jobs:
           echo ${{ steps.scrape.outputs.url }}
 
       - name: Notify to Slack
+        if: steps.scrape.outputs.changed == 'true'
         id: slack
-        if: ${{ steps.scrape.outputs.changed }} == "true"
         uses: slackapi/slack-github-action@v1.19.0
         with:
           payload: |
