@@ -23,13 +23,8 @@ jobs:
         id: scrape
         run: sh ./scrape.sh
 
-  notify_and_push_diff:
-    runs-on: ubuntu-latest
-    needs: scrape
-
-    steps:
       - name: Notify to Slack
-        run: echo ${{needs.scrape.outputs.changed}}
+        run: echo ${{steps.scrape.outputs.changed}}
       
       - name: Push diff
         run: |
@@ -38,5 +33,5 @@ jobs:
           if (git diff --shortstat | grep '[0-9]'); then \
             git add -u; \
             git commit -m "push differences by scheduler"; \
-            git push origin HEAD:${GITHUB_REF}; \
+            git push origin main; \
           fi
