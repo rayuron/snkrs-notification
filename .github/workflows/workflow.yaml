@@ -29,20 +29,19 @@ jobs:
         with:
           payload: |
           {
-            "text": "${{ title }}",
-            "attachments": [
+            “text”: “<!channel> ${{ steps.scrape.outputs.title }}“,
+            “attachments”: [
               {
-                "blocks": [
+                “color”: “#E60033”,
+                “blocks”: [
                   {
-                    "type": "section".
-                    "text": {
-                      "type": "mrkdwn", "text": ${{ url }}
-                      }.
-                  }
-                ]
-              }
-            ]
-          }
+                    “type”: “section”,
+                    “text”: {“type”: “mrkdwn”, “text”: ${{ steps.scrape.outputs.url }}},
+                    },
+                    ],
+                    }
+                    ],
+                    }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             
