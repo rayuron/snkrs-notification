@@ -8,8 +8,6 @@ on:
 jobs:
   scrape_and_notify:
     runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.scrape.outputs.changed }}
 
     steps:
       - uses: actions/checkout@v3
@@ -25,18 +23,19 @@ jobs:
 
       - name: Notify to Slack
         id: slack
+        if: ${{ steps.scrape.outputs.changed }} == "true"
         uses: slackapi/slack-github-action@v1.19.0
         with:
           payload: |
             {
-              "text”: "<!channel> ${{ steps.scrape.outputs.title }}",
-              "attachments”: [
+              "text": "<!channel> ${{ steps.scrape.outputs.title }}",
+              "attachments": [
                 {
-                  "color”: "#E60033”,
-                  "blocks”: [
+                  "color": "#E60033",
+                  "blocks": [
                     {
-                      "type”: "section”,
-                      "text”: {"type”: "mrkdwn”, "text”: ${{ steps.scrape.outputs.url }}},
+                      "type": "section",
+                      "text": {"type": "mrkdwn", "text": ${{ steps.scrape.outputs.url }}},
                     },
                   ],
                 }
