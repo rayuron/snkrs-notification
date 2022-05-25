@@ -15,6 +15,6 @@ title=`head -n 1 info.txt`
 url=`tail -n 1 info.txt`
 
 echo "::set-output name=changed::true"
-echo "::set-output name=title::$(echo title)"
-echo "::set-output name=url::$(echo url)"
+echo "::set-output name=title::$(echo $title)"
+echo "::set-output name=url::$(echo $url)"
 fi
