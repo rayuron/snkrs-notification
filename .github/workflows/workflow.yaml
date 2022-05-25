@@ -1,7 +1,8 @@
 name: Scrape the page and notify to Slack if it was updated.
 
 on:
-  schedule:
+  - workflow_dispatch
+  ##  - schedule:
     ## - cron:  '* * 1 * *'  ## TODO: Set up this when this code is completed.
 
 jobs:
@@ -17,8 +18,20 @@ jobs:
         id: scrape
         run: sh ./scrape.sh
 
-  notify:
+  notify_and_push_diff:
     runs-on: ubuntu-latest
+
     steps:
       - name: Notify to Slack
         run: echo ${{needs.scrape.outputs.changed}}
+      
+      - name: Push diff
+        run: |
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          if (git diff --shortstat | grep '[0-9]'); then \
+            git add -u; \
+            git commit -m "push differences by scheduler"; \
+            git push origin HEAD:${GITHUB_REF}; \
+          fi
