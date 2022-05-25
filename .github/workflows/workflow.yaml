@@ -21,6 +21,12 @@ jobs:
         id: scrape
         run: sh ./scrape.sh
 
+      - name: Echo
+        run: |
+          echo ${{ steps.scrape.outputs.changed }}
+          echo ${{ steps.scrape.outputs.title }}
+          echo ${{ steps.scrape.outputs.url }}
+
       - name: Notify to Slack
         id: slack
         if: ${{ steps.scrape.outputs.changed }} == "true"
@@ -35,7 +41,10 @@ jobs:
                   "blocks": [
                     {
                       "type": "section",
-                      "text": {"type": "mrkdwn", "text": ${{ steps.scrape.outputs.url }}},
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ steps.scrape.outputs.url }},
+                      },
                     },
                   ],
                 }
