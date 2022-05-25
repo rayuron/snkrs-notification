@@ -28,20 +28,20 @@ jobs:
         uses: slackapi/slack-github-action@v1.19.0
         with:
           payload: |
-          {
-            “text”: “<!channel> ${{ steps.scrape.outputs.title }}“,
-            “attachments”: [
-              {
-                “color”: “#E60033”,
-                “blocks”: [
-                  {
-                    “type”: “section”,
-                    “text”: {“type”: “mrkdwn”, “text”: ${{ steps.scrape.outputs.url }}},
+            {
+              “text”: “<!channel> ${{ steps.scrape.outputs.title }}“,
+              “attachments”: [
+                {
+                  “color”: “#E60033”,
+                  “blocks”: [
+                    {
+                      “type”: “section”,
+                      “text”: {“type”: “mrkdwn”, “text”: ${{ steps.scrape.outputs.url }}},
                     },
-                    ],
-                    }
-                    ],
-                    }
+                  ],
+                }
+              ],
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             
