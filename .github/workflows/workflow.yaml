@@ -21,11 +21,11 @@ jobs:
         id: scrape
         run: sh ./scrape.sh
 
-      - name: Echo
-        run: |
-          echo ${{ steps.scrape.outputs.changed }}
-          echo ${{ steps.scrape.outputs.title }}
-          echo ${{ steps.scrape.outputs.url }}
+      # - name: Echo
+      #   run: |
+      #     echo ${{ steps.scrape.outputs.changed }}
+      #     echo ${{ steps.scrape.outputs.title }}
+      #     echo ${{ steps.scrape.outputs.url }}
 
       - name: Notify to Slack
         if: steps.scrape.outputs.changed == 'true'
