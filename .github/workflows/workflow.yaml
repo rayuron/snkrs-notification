@@ -2,8 +2,8 @@ name: Scrape the page and notify to Slack if it was updated.
 
 on:
   - workflow_dispatch
-  - schedule:
-    - cron:  '*/10 * * * *'  ## TODO: Set up this when this code is completed.
+  #- schedule:
+  #  - cron:  '*/10 * * * *'  ## TODO: Set up this when this code is completed.
 
 jobs:
   scrape_and_notify:
