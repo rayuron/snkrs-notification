@@ -44,11 +44,11 @@ jobs:
                       "text": {
                         "type": "mrkdwn",
                         "text": "${{ steps.scrape.outputs.url }}"
-                      },
-                    },
-                  ],
+                      }
+                    }
+                  ]
                 }
-              ],
+              ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

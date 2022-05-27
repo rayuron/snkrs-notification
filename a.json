@@ -1,0 +1,14 @@
+{
+    "text": "<!channel> ${{ steps.scrape.outputs.title }}",
+    "attachments": [
+      {
+        "color": "#E60033",
+        "blocks": [
+          {
+            "type": "section",
+            "text": {"type": "mrkdwn", "text": "${{ steps.scrape.outputs.url }}"},
+          },
+        ],
+      }
+    ],
+  }
