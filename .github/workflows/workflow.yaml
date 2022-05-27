@@ -1,9 +1,8 @@
 name: Scrape the page and notify to Slack if it was updated.
 
 on:
-  - workflow_dispatch
-  #- schedule:
-  #  - cron:  '*/10 * * * *'  ## TODO: Set up this when this code is completed.
+  - schedule:
+    - cron:  '*/10 * * * *'
 
 jobs:
   scrape_and_notify:
@@ -21,12 +20,6 @@ jobs:
         id: scrape
         run: sh ./scrape.sh
 
-      # - name: Echo
-      #   run: |
-      #     echo ${{ steps.scrape.outputs.changed }}
-      #     echo ${{ steps.scrape.outputs.title }}
-      #     echo ${{ steps.scrape.outputs.url }}
-
       - name: Notify to Slack
         if: steps.scrape.outputs.changed == 'true'
         id: slack
@@ -34,7 +27,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "<!channel> ${{ steps.scrape.outputs.title }} \n <${{ steps.scrape.outputs.url }}>"
+              "text": "<!channel> \n ${{ steps.scrape.outputs.title }} \n <${{ steps.scrape.outputs.url }}>"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
