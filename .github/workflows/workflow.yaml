@@ -1,7 +1,7 @@
 name: Scrape the page and notify to Slack if it was updated.
 
 on:
-  - schedule:
+  schedule:
     - cron:  '*/10 * * * *'
 
 jobs:
