@@ -1,5 +1,5 @@
 curl -L https://www.nike.com/jp/launch > out.html
-sed -i -e "s/<head>/'<head><meta charset=utf-8 \/>/g" out.html
+sed -i -e "s/<head>/<head><meta charset=utf-8 \/>/g" out.html
 
 pre_url=`head -n 1 info.txt`
 cat $pre_title

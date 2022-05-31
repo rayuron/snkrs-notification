@@ -1,8 +1,9 @@
 name: Scrape the page and notify to Slack if it was updated.
 
 on:
-  schedule:
-    - cron:  '*/5 * * * *'
+  workflow_dispatch:
+  # schedule:
+  #   - cron:  '*/5 * * * *'
 
 jobs:
   scrape_and_notify:
