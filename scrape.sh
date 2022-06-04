@@ -6,7 +6,7 @@ echo $pre_title
 post_title=`xmllint --html --xpath "//div[@data-qa='product-card-0']//@aria-label" out.html | sed 's/^.*"\(.*\)".*$/\1/'`
 echo $post_title
 
-if [ $pre_title = $post_title ]; then
+if [ "$pre_title" = "$post_title" ]; then
 echo "::set-output name=changed::false"
 else
 echo `xmllint --html --xpath "//div[@data-qa='product-card-0']//@aria-label" out.html | sed 's/^.*"\(.*\)".*$/\1/'` > info.txt
