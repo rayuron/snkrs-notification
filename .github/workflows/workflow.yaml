@@ -28,7 +28,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "<!test> \n ${{ steps.scrape.outputs.title }} \n <https://www.nike.com/jp/launch>"
+              "text": "<!channel> \n ${{ steps.scrape.outputs.title }} \n <https://www.nike.com/jp/launch>"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
