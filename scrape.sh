@@ -8,12 +8,14 @@ echo $post_title
 
 if [ "$pre_title" = "$post_title" ]; then
 echo "::set-output name=changed::false"
+echo "same name"
 else
-echo `xmllint --html --xpath "//div[@data-qa='product-card-0']//@aria-label" out.html 2>/dev/null | sed 's/^.*"\(.*\)".*$/\1/'` > info.txt
-echo https://www.nike.com/jp/launch/`xmllint --html --xpath "//div[@data-qa='product-card-0']//@href" out.html 2>/dev/null | sed 's/^.*"\(.*\)".*$/\1/'` >> info.txt
+echo $post_title > info.txt
+## echo https://www.nike.com/jp/launch`xmllint --html --xpath "//div[@data-qa='product-card-0']//@href" out.html 2>/dev/null | sed 's/^.*"\(.*\)".*$/\1/'` >> info.txt
 title=`head -n 1 info.txt`
-url=`tail -n 1 info.txt`
+## url=`tail -n 1 info.txt`
+echo "different name"
 echo "::set-output name=changed::true"
 echo "::set-output name=title::$(echo $title)"
-echo "::set-output name=url::$(echo $url)"
+## echo "::set-output name=url::$(echo $url)"
 fi
